@@ -55,7 +55,7 @@
 			});  //image has loaded
 
 
-			// close overlay when clicked
+			// close overlay when image clicked
 			largeImage.addEventListener('click', function() {
 				if (myOverlay) { // if the overlay is present...
 					window.removeEventListener('resize', window, false); // cleans up anything that might be left behind after the overlay's been removed.
@@ -63,6 +63,17 @@
 					myOverlay.parentNode.removeChild(myOverlay);  //removeChild always works on the PARENT of the node you want to remove!
 				}
 			}, false) // pass it false so that it bubbles properly. So if the overlay is not up, then it should end the function and not work during normal website workings.
+
+
+			// close overlay when overlay is clicked
+			myOverlay.addEventListener('click', function() {
+				if (myOverlay) { // if the overlay is present...
+					window.removeEventListener('resize', window, false); // cleans up anything that might be left behind after the overlay's been removed.
+					window.removeEventListener('scroll', window, false);
+					myOverlay.parentNode.removeChild(myOverlay);  //removeChild always works on the PARENT of the node you want to remove!
+				}
+			}, false) // pass it false so that it bubbles properly. So if the overlay is not up, then it should end the function and not work during normal website workings.
+
 
 			// listen for screen scroll so that overlay adjusts with it.
 			window.addEventListener('scroll', function() {
