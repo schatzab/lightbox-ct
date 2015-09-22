@@ -20,17 +20,18 @@ h2 {
 	margin: 0 0 1em 0;
 	font-weight: normal;
 }
-#artlist {
+#photoCont {
 	border: 1px solid #888888;
 	padding: 1em;
 	width: 80%;
 	background-color: #ffffff;
 	display: inline-block;
 }
-.group li {
+.photos_each li {
 	float: left;
 	padding: 1em;
 	list-style-type: none;
+	cursor: pointer;
 }
 #overlay {
 	position: absolute;
@@ -39,38 +40,54 @@ h2 {
 	background-color: rgba(0,0,0,0.8);
 	cursor: pointer;			
 }
-#largeImage {
+#lgImage {
 	display: block;
 	position: absolute;
 	width: 28em;
 	height: 28em;
 	border: 2px solid #888888;
 }
+#nextLeftCont {
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 30%;
+}
 #nextLeft {
+	display: none;
 	height: 40px;
-	width: 40px;
-    vertical-align: middle;
-	border: 1px solid #888888;
-    border-radius: 20px;
+	width: 50px;
+    border-radius: 25px;
     -moz-border-radius: 20px;
-    background-color: #f4f4f4;
+    background-color: #888888;
     font-size: 36px;
     text-align: center;
     position: fixed;
     bottom: 50%;
     left: 10%;
+    padding-bottom: 10px;
+}
+#nextLeft:hover { background-color: #bfbfbf; }
+#nextRightCont {
+	height: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 30%;
 }
 #nextRight {
+	display: none;
 	height: 40px;
-	width: 40px;
-    vertical-align: middle;
-	border: 1px solid #888888;
-    border-radius: 20px;
+	width: 50px;
+    border-radius: 25px;
     -moz-border-radius: 20px;
-    background-color: #f4f4f4;
+    background-color: #888888;
     font-size: 36px;
     text-align: center;
     position: fixed;
     bottom: 50%;
     right: 10%;
+    padding-bottom: 10px;
 }
+#nextRight:hover { background-color: #bfbfbf; }

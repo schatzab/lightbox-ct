@@ -3,39 +3,44 @@
 // Self Executing Anonymous Function
 (function(){
 	// select box
-	var myNode = document.querySelector('#artlist .pixgrid ul');
+	var lightbox = document.querySelector('#photoCont .photos ul');
 
-	myNode.addEventListener("click", function(e) {  // allows us to only target things within this node.
+	lightbox.addEventListener("click", function(event) {  // allows us to only target things within this node.
 
-		if(e.target.tagName === 'IMG') { // if the event (e) target is an image, then...
+		if(event.target.tagName === 'IMG') { // if the event target is an image, then...
 			
-			var myOverlay = document.createElement('div'); // this creates a div for the element that's clicked
-			myOverlay.id = 'overlay'; // this gives the div and id of "overlay"
-			document.body.appendChild(myOverlay);
+			var pOverlay = document.createElement('div'); // this creates a div for the element that's clicked
+			pOverlay.id = 'overlay'; // this gives the div and id of "overlay"
+			document.body.appendChild(pOverlay); // this adds the div to the body
 
 			// size and position of overlay in css
-			myOverlay.style.width = window.innerWidth + 'px';
-			myOverlay.style.height = window.innerHeight + 'px';
-			myOverlay.style.top = window.pageYOffset + 'px';
-			myOverlay.style.left = window.pageXOffset + 'px';
+			pOverlay.style.width = window.innerWidth + 'px';
+			pOverlay.style.height = window.innerHeight + 'px';
+			pOverlay.style.top = window.pageYOffset + 'px';
+			pOverlay.style.left = window.pageXOffset + 'px';
 
 			// create large overlay image
-			var imageSrc = e.target.src; // what we clicked on's source will be stored in this variable
-			var largeImage = document.createElement('img'); // will create an element stored in this variable
-			largeImage.id = 'largeImage'; // the id will be named largeImage
-			largeImage.src = imageSrc.substr(0, imageSrc.length-7) + '.jpg';  // the source will be the target's source minus 7 characters from the end to remove _th.jpg, then add back jpg
+			var imageSrc = event.target.src; // what we clicked on's source will be stored in this variable
+			var lgImage = document.createElement('img'); // will create an element stored in this variable
+			lgImage.id = 'lgImage'; // the id will be named lgImage
+			lgImage.src = imageSrc.substr(0, imageSrc.length-7) + '.jpg';  // the source will be the target's source minus 7 characters from the end to remove _th.jpg, then add back jpg
 
-			// create next left button
+			// Next Left Button
+			var nextLeftCont = document.createElement('div');  // creates mouseover zone left
 			var nextLeft = document.createElement('div'); // this creates a div for the element that's clicked
+			nextLeftCont.id = 'nextLeftCont'; // gives div id of "nextLeftCont"
 			nextLeft.id = 'nextLeft'; // this gives the div an id of "nextLeft"
-			// create next right button
+			nextLeft.innerHTML = '&#10092;';
+			// Next Right Button
 			var nextRight = document.createElement('div'); // this creates a div for the element that's clicked
+			var nextRightCont = document.createElement('div');  // creates mouseover zone right
 			nextRight.id = 'nextRight'; // this gives the div an id of "nextright"
-
+			nextRightCont.id = 'nextRightCont'; // gives div id of "nextRightCont"
+			nextRight.innerHTML = '&#10093;';
 
 
 			// wait until image is loaded
-			largeImage.addEventListener('load', function(){
+			lgImage.addEventListener('load', function(){
 				// resize if taller than window
 				if (this.height > window.innerHeight) {
 					this.ratio = window.innerHeight / this.height;
@@ -51,39 +56,76 @@
 				}
 
 				centerImage(this); // calling the function just below to center the image right before it is appended to the overlay
-				myOverlay.appendChild(largeImage);  //  add the largeimage to the overlay (needs to be after the image has loaded so that H and W can be calculated)
-				myOverlay.appendChild(nextLeft);  // adds the nextLeft button to overlay
-				myOverlay.appendChild(nextRight);  // adds the nextLeft button to overlay
+				pOverlay.appendChild(lgImage);  //  add the lgimage to the overlay (needs to be after the image has loaded so that H and W can be calculated)
+				pOverlay.appendChild(nextLeft);  // adds the nextLeft button to overlay
+				pOverlay.appendChild(nextLeftCont); // adds nextLeftCont mouseover zone
+				pOverlay.appendChild(nextRight);  // adds the nextLeft button to overlay
+				pOverlay.appendChild(nextRightCont); // adds nextRightCont mouseover zone
 			});  //image has loaded
 
 
 			// close overlay when overlay is clicked
-			myOverlay.addEventListener('click', function() {
-				if (myOverlay) { // if the overlay is present, close overlay...
+			pOverlay.addEventListener('click', function() {
+				if (pOverlay) { // if the overlay is present, close overlay...
 					window.removeEventListener('resize', window, false); // cleans up anything that might be left behind after the overlay's been removed.
 					window.removeEventListener('scroll', window, false);
-					myOverlay.parentNode.removeChild(myOverlay);  //removeChild always works on the PARENT of the node you want to remove!
+					pOverlay.parentNode.removeChild(pOverlay);  //removeChild always works on the PARENT of the node you want to remove!
 				}
-			}, false) // pass it false so that it bubbles properly. So if the overlay is not up, then it should end the function and not work during normal website workings.
+			}, false); // pass it false so that it bubbles properly. So if the overlay is not up, then it should end the function and not work during normal website workings.
+
+
+
+
+
+			// arrows appear when mouseover next containers
+			nextLeftCont.addEventListener('mouseenter', function showArrows() {
+				if (pOverlay) { // if the overlay is present...
+					nextLeft.style.display = 'inline';  // show arrows
+					nextRight.style.display = 'inline';  // show arrows
+				}
+			}, false); // pass it false so that it bubbles properly.
+			nextRightCont.addEventListener('mouseenter', function showArrows() {
+				if (pOverlay) { // if the overlay is present...
+					nextLeft.style.display = 'inline';  // show arrows
+					nextRight.style.display = 'inline';  // show arrows
+				}
+			}, false);
+
+			// arrows hide on mouseleave
+			nextLeftCont.addEventListener('mouseleave', function hideArrows() {
+				if (pOverlay) { // if the overlay is present...
+					nextLeft.style.display = 'none';  // show arrows
+					nextRight.style.display = 'none';  // show arrows
+				}
+			}, false); // pass it false so that it bubbles properly.
+			// arrows hide on mouseleave
+			nextRightCont.addEventListener('mouseleave', function hideArrows() {
+				if (pOverlay) { // if the overlay is present...
+					nextLeft.style.display = 'none';  // show arrows
+					nextRight.style.display = 'none';  // show arrows
+				}
+			}, false); 
+
+
 
 
 			// listen for screen scroll so that overlay adjusts with it.
 			window.addEventListener('scroll', function() {
-				if (myOverlay) {
-					myOverlay.style.top = window.pageYOffset + 'px';
-					myOverlay.style.left = window.pageXOffset + 'px';
+				if (pOverlay) {
+					pOverlay.style.top = window.pageYOffset + 'px';
+					pOverlay.style.left = window.pageXOffset + 'px';
 				}
 			}, false);
 
 			// listener for another window event, resizing the screen.
 			window.addEventListener('resize', function(){
-				if (myOverlay) {
-					myOverlay.style.width = window.innerWidth + 'px';
-					myOverlay.style.height = window.innerHeight + 'px';
-					myOverlay.style.top = window.pageYOffset + 'px';
-					myOverlay.style.left = window.pageXOffset + 'px';
+				if (pOverlay) {
+					pOverlay.style.width = window.innerWidth + 'px';
+					pOverlay.style.height = window.innerHeight + 'px';
+					pOverlay.style.top = window.pageYOffset + 'px';
+					pOverlay.style.left = window.pageXOffset + 'px';
 
-					centerImage(largeImage);
+					centerImage(lgImage);
 				}
 			}, false);
 
