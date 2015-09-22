@@ -27,7 +27,10 @@
 
 			// create next left button
 			var nextLeft = document.createElement('div'); // this creates a div for the element that's clicked
-			nextLeft.id = 'nextLeft'; // this gives the div and id of "nextLeft"
+			nextLeft.id = 'nextLeft'; // this gives the div an id of "nextLeft"
+			// create next right button
+			var nextRight = document.createElement('div'); // this creates a div for the element that's clicked
+			nextRight.id = 'nextRight'; // this gives the div an id of "nextright"
 
 
 
@@ -50,6 +53,7 @@
 				centerImage(this); // calling the function just below to center the image right before it is appended to the overlay
 				myOverlay.appendChild(largeImage);  //  add the largeimage to the overlay (needs to be after the image has loaded so that H and W can be calculated)
 				myOverlay.appendChild(nextLeft);  // adds the nextLeft button to overlay
+				myOverlay.appendChild(nextRight);  // adds the nextLeft button to overlay
 			});  //image has loaded
 
 
