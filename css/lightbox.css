@@ -20,24 +20,42 @@ h2 {
 	margin: 0 0 1em 0;
 	font-weight: normal;
 }
-img {
-	width: 100%;
-	height: 100%;
-	border: 0px;
-}
 #artlist {
-	border: 1px solid red;
+	border: 1px solid #888888;
 	padding: 1em;
 	width: 80%;
 	background-color: #ffffff;
 	display: inline-block;
 }
-.each_box {
+.group li {
 	float: left;
-	min-height: 10em;
-	min-width: 10em;
-	border: 2px solid green;
 	padding: 1em;
-	margin: 1em;
+	list-style-type: none;
 }
-
+#overlay {
+	position: absolute;
+	top: 0;
+	background-color: #000000;
+	background-color: rgba(0,0,0,0.8);
+	cursor: pointer;			
+}
+#largeImage {
+	display: block;
+	position: absolute;
+	width: 28em;
+	height: 28em;
+	border: 2px solid #888888;
+}
+#nextLeft {
+	height: 40px;
+	width: 40px;
+    display: inline-block;
+    vertical-align: middle;
+	border: 1px solid #888888;
+	position: relative;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    background-color: #f4f4f4;
+    font-size: 36px;
+    text-align: center;
+}

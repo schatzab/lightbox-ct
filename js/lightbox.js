@@ -13,12 +13,6 @@
 			myOverlay.id = 'overlay'; // this gives the div and id of "overlay"
 			document.body.appendChild(myOverlay);
 
-			// set up overlay in styles -- move all this part to CSS stylesheet
-			myOverlay.style.position = 'absolute';
-			myOverlay.style.top = 0;
-			myOverlay.style.backgroundColor = '#000000'; // have to set the color before opacity can be used
-			myOverlay.style.backgroundColor = 'rgba(0,0,0,0.7)'; // last number is for transparency
-			myOverlay.style.cursor = 'pointer';
 			// size and position of overlay in css
 			myOverlay.style.width = window.innerWidth + 'px';
 			myOverlay.style.height = window.innerHeight + 'px';
@@ -30,8 +24,11 @@
 			var largeImage = document.createElement('img'); // will create an element stored in this variable
 			largeImage.id = 'largeImage'; // the id will be named largeImage
 			largeImage.src = imageSrc.substr(0, imageSrc.length-7) + '.jpg';  // the source will be the target's source minus 7 characters from the end to remove _th.jpg, then add back jpg
-			largeImage.style.display = 'block';
-			largeImage.style.position = 'absolute';
+
+			// create next left button
+			var nextLeft = document.createElement('div'); // this creates a div for the element that's clicked
+			nextLeft.id = 'nextLeft'; // this gives the div and id of "nextLeft"
+
 
 
 			// wait until image is loaded
@@ -52,22 +49,13 @@
 
 				centerImage(this); // calling the function just below to center the image right before it is appended to the overlay
 				myOverlay.appendChild(largeImage);  //  add the largeimage to the overlay (needs to be after the image has loaded so that H and W can be calculated)
+				myOverlay.appendChild(nextLeft);  // adds the nextLeft button to overlay
 			});  //image has loaded
-
-
-			// close overlay when image clicked
-			largeImage.addEventListener('click', function() {
-				if (myOverlay) { // if the overlay is present...
-					window.removeEventListener('resize', window, false); // cleans up anything that might be left behind after the overlay's been removed.
-					window.removeEventListener('scroll', window, false);
-					myOverlay.parentNode.removeChild(myOverlay);  //removeChild always works on the PARENT of the node you want to remove!
-				}
-			}, false) // pass it false so that it bubbles properly. So if the overlay is not up, then it should end the function and not work during normal website workings.
 
 
 			// close overlay when overlay is clicked
 			myOverlay.addEventListener('click', function() {
-				if (myOverlay) { // if the overlay is present...
+				if (myOverlay) { // if the overlay is present, close overlay...
 					window.removeEventListener('resize', window, false); // cleans up anything that might be left behind after the overlay's been removed.
 					window.removeEventListener('scroll', window, false);
 					myOverlay.parentNode.removeChild(myOverlay);  //removeChild always works on the PARENT of the node you want to remove!
